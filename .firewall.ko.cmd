@@ -1,1 +1,0 @@
-savedcmd_/home/vboxuser/Desktop/cs433/firewall.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /home/vboxuser/Desktop/cs433/firewall.ko /home/vboxuser/Desktop/cs433/firewall.o /home/vboxuser/Desktop/cs433/firewall.mod.o
