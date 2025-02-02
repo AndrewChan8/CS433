@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  align-items: center; 
+  padding: 20px;
+  background-color: #171920 ;
+}
+
+.logo a {
+  color: #0066ff;
+  font-size: 2rem;
+  margin: 30px;
+  font-weight: bold;
+}
+
+.link {
+  margin: 0 10px; 
+  font-size: 1.7rem;
+  color: #d1d5dc;
+  padding: 10px 20px;
+}
+
+.navbar a {
+  text-decoration: none; 
+}
+
+.navbar .active {
+  color: white; 
+  background-color: #43444b;
+  border-radius: 10px;
+}
+
+.link:hover {
+  background-color: #2c2e35 ;
+  border-radius: 10px;
+}

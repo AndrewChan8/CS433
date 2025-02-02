@@ -1,0 +1,10 @@
+/* Traffic Graph */
+.graph {
+  width : 70%;
+}
+
+.trafficMain {
+  display: flex;
+  justify-content: center;
+  width: 100%
+}
