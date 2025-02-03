@@ -1,10 +1,16 @@
 /* Traffic Graph */
-.graph {
-  width : 70%;
+.trafficContainer {
+  display: flex;
+  justify-content: center;
+  width : 80%;
+  border: 2px #575757 solid;
+  border-radius: 15px;
+  margin: 10px 15px;
+  height: 400px;
 }
 
 .trafficMain {
   display: flex;
   justify-content: center;
-  width: 100%
+  width: 100%;
 }

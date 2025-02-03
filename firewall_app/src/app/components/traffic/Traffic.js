@@ -4,10 +4,12 @@ import styles from "./Traffic.module.css"
 function Traffic () {
   return (
     <div className={styles.trafficMain}>
-      <div className={styles.graph}>
-        <InOut />
+      <div className={styles.trafficContainer}>
+        <InOut className={styles.trafficGraph} />
       </div>
-      <Protocol/>
+      <div className={styles.protocolContainer}>
+        <Protocol className={styles.protocolGraph}/>
+      </div>
     </div>
   )
 }

@@ -5,8 +5,8 @@
   background-color: #2c2e35;
   width: 120px;
   border-radius: 18px;
-  padding: 6px 10px;
-  border: 2px #575757 solid;
+  padding: 4px 10px;
+  border: 1px #575757 solid;
 }
 
 .statusImg {
@@ -14,6 +14,5 @@
 }
 
 .statusMsg {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1rem;
 }

@@ -7,16 +7,16 @@
 
 .logo a {
   color: #0066ff;
-  font-size: 2rem;
-  margin: 30px;
+  font-size: 1.5rem;
+  margin: 15px 10px;
   font-weight: bold;
 }
 
 .link {
   margin: 0 10px; 
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   color: #d1d5dc;
-  padding: 10px 20px;
+  padding: 10px;
 }
 
 .navbar a {

@@ -19,7 +19,8 @@ function Protocol() {
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend, 
+    Colors
   );
   const data = {
     labels : ["HTTP", "HTTPS", "FTP"],
