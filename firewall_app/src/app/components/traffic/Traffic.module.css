@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.trafficMain {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* border: 2px #575757 solid; */
+  border-radius: 15px;
+  height: 400px;
+  margin: 10px 15px;
+}
+
+.trafficContainer, .protocolContainer {
+  border-radius: 15px;
+  border: 2px #575757 solid;
+  padding: 10px 25px;
+}
+
+.trafficContainer {
+  width: 80%;
+}
+
+.protocolContainer {
+  width: 19%;
+}
