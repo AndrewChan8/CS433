@@ -30,6 +30,7 @@ function Protocol() {
     }]
   }
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
   }
   return (

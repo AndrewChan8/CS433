@@ -33,6 +33,7 @@ function InOut() {
   }
 
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     plugins: {
       legend: {
