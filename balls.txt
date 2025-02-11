@@ -1,0 +1,7 @@
+make
+sudo rmmod firewall
+sudo insmod firewall.ko
+
+python3 listener.py &
+
+ping 127.0.0.1

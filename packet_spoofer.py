@@ -20,10 +20,10 @@ def main():
         backslash_i = src_ip.index('/')
         a.src = src_ip[:backslash_i - 1] + rand_host_bytes
         print(a.src) 
-        # built packet
-        # b = ICMP()
-        # p = a/b
+        # build packet
+        b = ICMP()
+        p = a/b
         # send it out baby
-        # send(p, verbose=1)
+        send(p, verbose=1)
         time.sleep(2)
 main()
