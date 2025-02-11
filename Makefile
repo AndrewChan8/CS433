@@ -4,7 +4,5 @@ all:
 clean:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
 
-
-
-
-
+listener:
+	gcc -o listener listener.c
