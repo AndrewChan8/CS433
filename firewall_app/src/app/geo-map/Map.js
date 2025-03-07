@@ -1,24 +1,23 @@
 "use client"
-import { useEffect } from 'react';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import React, { useRef } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
-function MapComponent() {
-  useEffect(() => {
-    const map = L.map('map', {
-      center: [20, 0],
-      zoom: 2,
-      minZoom: 2,
-      maxZoom: 18,
-    });
+const SimpleMap = () => {
+  const mapRef = useRef(null);
+  const latitude = 0;
+  const longitude = 0;
 
-    // Tile Layer (OpenStreetMap in this case)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  return ( 
+    // Make sure you set the height and width of the map container otherwise the map won't show
+      <MapContainer center={[latitude, longitude]} zoom={2} ref={mapRef} style={{height: "600px", width: "100vw"}}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {/* Additional map layers or components can be added here */}
+      </MapContainer>
+  );
+};
 
-  }, []);
-  return (
-    <div id="map" style={{ height: '500px' }} />
-);
-}
-
-export default MapComponent
+export default SimpleMap;

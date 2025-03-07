@@ -21,22 +21,22 @@ export async function initializeDb() {
 
     // Create the table if it doesn't exist
     await db.exec(`
-      CREATE TABLE IF NOT EXISTS packet_logs (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        timestamp TEXT NOT NULL,
-        source_ip TEXT NOT NULL,
-        destination_ip TEXT NOT NULL,
-        protocol TEXT NOT NULL,
-        port TEXT NOT NULL,
-        data TEXT
-      );
-    `);
-
-    console.log('Table is ready.');
-
-    return db; // Return the connection for further use if needed
-  } catch (error) {
-    console.error('Error initializing database:', error);
-    throw error; // Ensure errors propagate properly
-  }
-}
+        CREATE TABLE IF NOT EXISTS packet_logs (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          source_ip TEXT NOT NULL,
+          destination_ip TEXT NOT NULL
+          );
+        `);
+          
+        console.log('Table is ready.');
+        
+        return db; // Return the connection for further use if needed
+      } catch (error) {
+        console.error('Error initializing database:', error);
+        throw error; // Ensure errors propagate properly
+      }
+    }
+    
+    // timestamp TEXT NOT NULL,
+    // protocol TEXT NOT NULL,
+    // port TEXT NOT NULL,

@@ -7,15 +7,22 @@ import Traffic from "./components/traffic/Traffic.js"
 function Dashboard() {
   const [data, setData] = useState([])
     useEffect(() => {
-      const fetchData = async () => {
-        const response = await fetch("/api/initializeApp"); 
-        const result = await response.json()
-        console.log(result)
-        setData(result.data);
+      const initDB = async () => {
+        const response = await fetch("/api/initializeDB"); 
+        await response.json()
       };
-      fetchData();
+      initDB();
   }, []);
-  
+
+  useEffect (() => {
+    const readDB = async () => {
+      const response = await fetch ("/api/readDB");
+      const result = await response.json()
+      setData(result);
+    }
+    readDB()
+  }, []);
+  console.log("This is data", data)
   return (
     <>
       <Header/>
@@ -24,7 +31,22 @@ function Dashboard() {
         <h1 className="text-3xl font-bold">Welcome to the Dashboard</h1>
         <p className="text-lg text-gray-600">This is the main landing page.</p>
       </main>
-      <p>{ data }</p>
+      <div>
+      <h1>Packet Logs</h1>
+      {/* {data.length === 0 ? (
+        <p>Loading data...</p>
+      ) : (
+        <ul>
+          {data.map((item, index) => (
+            <li key={index}>
+              <strong>Source:</strong> {item.data} →  
+              <strong> Destination:</strong> {item.destination_ip}  
+            </li>
+          ))}
+        </ul>
+      )} */}
+    </div>
+      
     </>
   );
 }
