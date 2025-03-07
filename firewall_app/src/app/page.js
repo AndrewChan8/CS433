@@ -33,18 +33,18 @@ function Dashboard() {
       </main>
       <div>
       <h1>Packet Logs</h1>
-      {/* {data.length === 0 ? (
+      {data.length === 0 ? (
         <p>Loading data...</p>
       ) : (
         <ul>
           {data.map((item, index) => (
             <li key={index}>
-              <strong>Source:</strong> {item.data} →  
+              <strong>Source:</strong> {item.source_ip} →  
               <strong> Destination:</strong> {item.destination_ip}  
             </li>
           ))}
         </ul>
-      )} */}
+      )}
     </div>
       
     </>
