@@ -14,15 +14,6 @@ function Dashboard() {
       initDB();
   }, []);
 
-  useEffect (() => {
-    const readDB = async () => {
-      const response = await fetch ("/api/readDB");
-      const result = await response.json()
-      setData(result);
-    }
-    readDB()
-  }, []);
-  console.log("This is data", data)
   return (
     <>
       <Header/>
@@ -33,7 +24,7 @@ function Dashboard() {
       </main>
       <div>
       <h1>Packet Logs</h1>
-      {data.length === 0 ? (
+      {/* {data.length === 0 ? (
         <p>Loading data...</p>
       ) : (
         <ul>
@@ -41,10 +32,11 @@ function Dashboard() {
             <li key={index}>
               <strong>Source:</strong> {item.source_ip} →  
               <strong> Destination:</strong> {item.destination_ip}  
+              <strong>timestamp :</strong> {item.timestamp}
             </li>
           ))}
         </ul>
-      )}
+      )} */}
     </div>
       
     </>

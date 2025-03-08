@@ -24,7 +24,12 @@ export async function initializeDb() {
         CREATE TABLE IF NOT EXISTS packet_logs (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           source_ip TEXT NOT NULL,
-          destination_ip TEXT NOT NULL
+          destination_ip TEXT NOT NULL,
+          latitude REAL NOT NULL, 
+          longitude REAL NOT NULL,
+          city TEXT, 
+          country TEXT,
+          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
           );
         `);
           

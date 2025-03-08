@@ -40,4 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-./database/database.sqlite
+# Prevent DB file from being added
+*.sqlite
