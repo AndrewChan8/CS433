@@ -104,7 +104,7 @@ int main() {
         char *infoData = (char *)NLMSG_DATA(nlh);
         
         // printf("[USER2] Received from kernel: %s\n", infoData); // may cause issues if string contains '
-        // printf("[USER1] Received from kernel: %s\n", (char *)NLMSG_DATA(nlh));
+        printf("[USER1] Received from kernel: %s\n", (char *)NLMSG_DATA(nlh));
         char src_ip[32], dest_ip[32];
         if (is_local_ip(src_ip) || is_local_ip(dest_ip)) {
             // printf("Skipping local IP: %s or %s\n", src_ip, dest_ip);
