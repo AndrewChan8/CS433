@@ -25,8 +25,8 @@ export async function initializeDb() {
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           source_ip TEXT NOT NULL,
           destination_ip TEXT NOT NULL,
-          latitude REAL NOT NULL, 
-          longitude REAL NOT NULL,
+          latitude REAL, 
+          longitude REAL,
           city TEXT, 
           country TEXT,
           timestamp DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL

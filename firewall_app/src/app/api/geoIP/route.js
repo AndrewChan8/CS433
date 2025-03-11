@@ -1,9 +1,10 @@
-import { queryDb } from '../../../../lib/readDB';
+import { queryDb } from '../../../../lib/dbHandler';
 
 export async function GET(req) {
   try {
     // Query the database for the most recent 100 packet logs
-    const logs = await queryDb('SELECT * FROM packet_logs ORDER BY timestamp DESC LIMIT 5;');
+    const logs = await queryDb('SELECT * FROM packet_logs ORDER BY timestamp DESC LIMIT 20;');
+    
     // Get unique IP addresses from the logs
     const ipAddresses = logs.map(log => log.source_ip);
     

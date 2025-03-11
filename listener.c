@@ -9,6 +9,10 @@
 #define NETLINK_USER 31
 #define MAX_PAYLOAD 1024  // Maximum payload size
 
+int is_local_ip(const char *ip){
+    return (strncmp(ip, "127.0.0.", 8) == 0);
+}
+
 int main() {
     sqlite3 *db;
     char *errMsg = NULL;
@@ -21,7 +25,6 @@ int main() {
         printf("Database connection was successful!\n");
     };
    
-
     struct sockaddr_nl src_addr, dest_addr;
     struct nlmsghdr *nlh = NULL;
     struct iovec iov;
@@ -99,15 +102,22 @@ int main() {
     while (1) {
         recvmsg(sock_fd, &msg, 0);
         char *infoData = (char *)NLMSG_DATA(nlh);
-        printf("[USER] Received from kernel: %s\n", infoData); // may cause issues if string contains '
         
+        // printf("[USER2] Received from kernel: %s\n", infoData); // may cause issues if string contains '
+        // printf("[USER1] Received from kernel: %s\n", (char *)NLMSG_DATA(nlh));
         char src_ip[32], dest_ip[32];
-        sscanf(infoData, "SRC=%[^,], DST=%s", src_ip, dest_ip);
+        if (is_local_ip(src_ip) || is_local_ip(dest_ip)) {
+            // printf("Skipping local IP: %s or %s\n", src_ip, dest_ip);
+            // printf("------------------------------------------\n");
+
+            continue;
+        };
+        sscanf(infoData, "SRC=%[^,], DST=%s", src_ip, dest_ip); // parsing the data
         printf("Source ip: %s Dest ip: %s\n", src_ip, dest_ip);
         printf("------------------------------------------\n");
         snprintf(sql, sizeof(sql),
-        "INSERT INTO packet_logs (source_ip, destination_ip) "
-        "VALUES ('%s', '%s');",
+        "INSERT INTO packet_logs (source_ip, destination_ip, timestamp) "
+        "VALUES ('%s', '%s', datetime('now'));",
         src_ip, dest_ip);
         
         rc = sqlite3_exec(db, sql, 0, 0, &errMsg);
