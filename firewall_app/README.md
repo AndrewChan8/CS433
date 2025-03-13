@@ -1,20 +1,13 @@
 ## Getting Started
+1. Install dependecies : 
 
-First, run the development server:
+    `npm install`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Run the development server:
+
+    `npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Common Errors
 
-rm -rf node_modules package-lock.json
-Error: Could not locate the bindings file. Tried:
+See root directory `README.md` to view full instructions!

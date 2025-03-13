@@ -33,7 +33,7 @@ This application is locally hosted. To begin monitoring, the firewall script mus
 
     `./listener`
 
-**Note:** To stop the listener module, simply press `Ctrl + D` if the script is waiting for input, or use `Ctrl + C` to interrupt it immediately. If needed, you can also remove the `./listener` executable by running `rm ./listener` in your terminal.
+**Note:** To stop the listener module, simply press `Ctrl + D` if the script is waiting for input, or use `Ctrl + C` to interrupt it immediately. If needed, you can also remove the `./listener` executable by running `rm ./listener` in your terminal. 
 
 ### STEP 3 : Running the Web Application 
 
@@ -56,8 +56,13 @@ This application is locally hosted. To begin monitoring, the firewall script mus
 4. **Access the web app**:
     - Open your browser and go to `http://localhost:3000` to view and interact with the firewall application.
 
-**NOTE:** If you encouter any issues when running `npm install` you may try : 
-1. Add Issues here
+**NOTE:** If you encouter any issues when running, see list of potential issues you may try : 
+1. Error: Could not locate the bindings file. Remove and re-install the package json independicies
+
+    `rm -rf node_modules package-lock.json`
+    
+    Run `npm install` again. 
+2. 
 
 
 > Once the firewall is running, the listener script captures network data, which is processed and visualized on the GeoMap dashboard.
