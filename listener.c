@@ -9,8 +9,9 @@
 #define NETLINK_USER 31
 #define MAX_PAYLOAD 1024  // Maximum payload size
 
-int is_local_ip(const char *ip){
-    return (strncmp(ip, "127.0.0.", 8) == 0);
+int is_local_ip(char *ip){
+    int result = strncmp(ip, "127.0.0.", 8) == 0;
+    return result;
 }
 
 int main() {
@@ -99,22 +100,28 @@ int main() {
     // Receive messages from the kernel
     printf("[USER] Waiting for messages from the kernel...\n");
     char sql[512];
+    int count = 0;
     while (1) {
         recvmsg(sock_fd, &msg, 0);
-        char *infoData = (char *)NLMSG_DATA(nlh);
+        printf("\n");
+        printf("[INFO] Received from kernel\n");
         
-        // printf("[USER2] Received from kernel: %s\n", infoData); // may cause issues if string contains '
-        printf("[USER1] Received from kernel: %s\n", (char *)NLMSG_DATA(nlh));
+        char *infoData = (char *)NLMSG_DATA(nlh);
         char src_ip[32], dest_ip[32];
-        if (is_local_ip(src_ip) || is_local_ip(dest_ip)) {
-            // printf("Skipping local IP: %s or %s\n", src_ip, dest_ip);
-            // printf("------------------------------------------\n");
+        
+        sscanf(infoData, "SRC=%[^,], DST=%s", src_ip, dest_ip); // parsing the data
 
+        printf(" ├─ SRC: %s\n", src_ip);
+        printf(" ├─ DST: %s\n", dest_ip);
+        printf(" ├─ Local Check:\n");
+        printf(" │   ├─ SRC Local? %s\n", is_local_ip(src_ip) ? "✅" : "❌");
+        printf(" │   └─ DST Local? %s\n", is_local_ip(dest_ip) ? "✅" : "❌");
+        
+        if (is_local_ip(src_ip) || is_local_ip(dest_ip)) {
+            printf(" └─ Ignored (Local Traffic) ⚠️\n");
             continue;
         };
-        sscanf(infoData, "SRC=%[^,], DST=%s", src_ip, dest_ip); // parsing the data
-        printf("Source ip: %s Dest ip: %s\n", src_ip, dest_ip);
-        printf("------------------------------------------\n");
+
         snprintf(sql, sizeof(sql),
         "INSERT INTO packet_logs (source_ip, destination_ip, timestamp) "
         "VALUES ('%s', '%s', datetime('now'));",
@@ -124,7 +131,11 @@ int main() {
         if (rc != SQLITE_OK) {
             fprintf(stderr, "SQL error: %s\n", errMsg);
             sqlite3_free(errMsg);
-        }
+        } else {
+            count++;
+            printf(" └─ Amount Inserted : %d\n", count);
+            printf(" └─ Inserted into DB ✅\n");
+        }        
     }
     sqlite3_close(db);
     // Cleanup
