@@ -90,6 +90,7 @@ There are two machines, a virtual machine and a docker container. The docker con
 5. Execute the python packet sending program from the container terminal we just opened
     `cd tmp`
     `python3 packet_spoofer.py`
+    
 6. Open up a second terminal inside your VM, we now need to compile and load the firewall
 
 ### How to run firewall

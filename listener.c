@@ -56,9 +56,11 @@ int main() {
     memset(&src_addr, 0, sizeof(src_addr));
     src_addr.nl_family = AF_NETLINK;
     src_addr.nl_pid = getpid();  // User-space process ID
+    printf("PID : %d\n", src_addr.nl_pid);
+    printf("Binding Socket...\n");
     // bind(sock_fd, (struct sockaddr *)&src_addr, sizeof(src_addr));
     if (bind(sock_fd, (struct sockaddr *)&src_addr, sizeof(src_addr)) < 0) {
-        perror("bind");
+        perror("bind failed");
         close(sock_fd);
         return -1;
     }
@@ -104,7 +106,7 @@ int main() {
     while (1) {
         recvmsg(sock_fd, &msg, 0);
         printf("\n");
-        printf("[INFO] Received from kernel\n");
+        printf("[INFO] Received from kernel %s\n", (char *)NLMSG_DATA(nlh));
         
         char *infoData = (char *)NLMSG_DATA(nlh);
         char src_ip[32], dest_ip[32];
@@ -143,4 +145,3 @@ int main() {
     free(nlh);
     return 0;
 }
-

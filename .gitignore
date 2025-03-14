@@ -8,3 +8,5 @@ Mo*
 mo*
 
 myenv
+
+*.sqlite
