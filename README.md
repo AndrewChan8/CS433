@@ -69,9 +69,6 @@ Our project was developed and tested in Ubuntu 24.04.2.  It is highly recommende
     `rm -rf node_modules package-lock.json`
     
     Run `npm install` again. 
-2. Error: npm ERR! code ENOTEMPTY run the following:
-   'npx rimraf node_modules package-lock.json'
-   'npm install'
 
 
 > Once the firewall is running, the listener script captures network data, which is processed and visualized on the GeoMap dashboard.
