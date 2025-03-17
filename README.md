@@ -50,6 +50,7 @@ Our project was developed and tested in Ubuntu 24.04.2.  It is highly recommende
     - Once Node.js is installed, run the following command to install all required dependencies:
 
       `npm install`
+    - if errors occur, see error list and fixes below
 3. **Creating your IPGeo API key**:
     Head over to [IP Geolocation](https://ipgeolocation.io/) to create a free account. Once logged in, head over to dashboards to copy your api key into the program. 
     
@@ -68,7 +69,9 @@ Our project was developed and tested in Ubuntu 24.04.2.  It is highly recommende
     `rm -rf node_modules package-lock.json`
     
     Run `npm install` again. 
-2. 
+2. Error: npm ERR! code ENOTEMPTY run the following:
+   'npx rimraf node_modules package-lock.json'
+   'npm install'
 
 
 > Once the firewall is running, the listener script captures network data, which is processed and visualized on the GeoMap dashboard.
