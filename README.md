@@ -7,7 +7,7 @@ GeoMap is a real-time network monitoring tool that visualizes IP traffic and pot
 ## Getting Started  
 This application is locally hosted. To begin monitoring, the firewall script must first be loaded into the kernel module, followed by running the listener script to capture network traffic. 
 
-Our project was developed and tested in Ubuntu 24.04.2.  It is highly recommended to use the same environment.
+Our project was developed and tested in Ubuntu 24.04.2.  It is highly recommended to use the same environmenta as we cannot gurantee succesful use in others.
 
 ### STEP 1 :  Loading the Firewall  
 
