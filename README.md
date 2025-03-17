@@ -5,7 +5,9 @@ Authors & Developers : Liam Bouffard, Andrew Chan, Sophia Zhang
 GeoMap is a real-time network monitoring tool that visualizes IP traffic and potential security threats by mapping incoming connections. It works alongside a firewall script that filters network traffic based on predefined rules, allowing or blocking connections as needed. A listener script continuously captures network data, which is analyzed and displayed on an interactive map to track connection origins and patterns. Built with React Leaflet, the system leverages marker clustering for efficient data visualization, providing users with an intuitive way to monitor and analyze network activity across different locations.
 
 ## Getting Started  
-This application is locally hosted. To begin monitoring, the firewall script must first be loaded into the kernel module, followed by running the listener script to capture network traffic.  
+This application is locally hosted. To begin monitoring, the firewall script must first be loaded into the kernel module, followed by running the listener script to capture network traffic. 
+
+Our project was developed and tested in Ubuntu 24.04.2.  It is highly recommended to use the same environment.
 
 ### STEP 1 :  Loading the Firewall  
 
