@@ -1,145 +1,229 @@
-# Firewall Monitoring Tool
-Authors & Developers : Liam Bouffard, Andrew Chan, Sophia Zhang
+# 🔥 GeoMap: Real-Time Firewall Monitoring & Visualization Tool
 
-## Introduction 
-GeoMap is a real-time network monitoring tool that visualizes IP traffic and potential security threats by mapping incoming connections. It works alongside a firewall script that filters network traffic based on predefined rules, allowing or blocking connections as needed. A listener script continuously captures network data, which is analyzed and displayed on an interactive map to track connection origins and patterns. Built with React Leaflet, the system leverages marker clustering for efficient data visualization, providing users with an intuitive way to monitor and analyze network activity across different locations.
+**Authors & Developers**: Andrew Chan, Sophia Zhang, Liam Bouffard  
+**Languages:** C (Kernel Module, Netlink), JavaScript/React (Frontend), Python (Testing), SQL (SQLite3)  
+**Project Type:** Systems Programming / Network Security / Full-Stack Visualization  
+**Last Updated (Code):** March 2025  
+**Last Updated (Documentation):** April 2025
 
-## Getting Started  
-This application is locally hosted. To begin monitoring, the firewall script must first be loaded into the kernel module, followed by running the listener script to capture network traffic. 
+A full-stack personal project combining **Linux kernel-level packet monitoring**, **Netlink socket communication**, **SQLite3 data persistence**, and an interactive **Next.js dashboard** with maps, analytics, and logs.
 
-Our project was developed and tested in Ubuntu 24.04.2.  It is highly recommended to use the same environmenta as we cannot gurantee succesful use in others.
+This project visualizes intercepted network traffic in real time, geolocates source IPs, and renders insights using charts and maps.
 
-### STEP 1 :  Loading the Firewall  
+## 🏷️ Badges
 
-1. **Compile the firewall module:**  
-    `make`
+![Linux Kernel Module](https://img.shields.io/badge/Kernel%20Module-Netfilter%20Hook-green?logo=linux)
+![C](https://img.shields.io/badge/C-Low%20Level-blue?logo=c)
+![Netlink IPC](https://img.shields.io/badge/IPC-Netlink-blueviolet)
+![SQLite3](https://img.shields.io/badge/Database-SQLite3-lightgrey?logo=sqlite)
+![Next.js](https://img.shields.io/badge/Frontend-Next.js-000?logo=nextdotjs)
+![React](https://img.shields.io/badge/React-19.0.0-61DAFB?logo=react)
+![Chart.js](https://img.shields.io/badge/Chart.js-4.4.7-FF6384?logo=chartdotjs)
+![Leaflet](https://img.shields.io/badge/Map-Leaflet-199900?logo=leaflet)
+![Python](https://img.shields.io/badge/Python-Scapy-yellow?logo=python)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-2. **Insert the firewall module into the running kernel:**  
-   `sudo insmod firewall.ko`  
+## 🌐 Overview
 
-3. **Verify the module is loaded:**  
-   `lsmod | grep firewall`
+**GeoMap** is a real-time network monitoring platform that visualizes IP traffic and potential security threats on an interactive map. It integrates with a custom firewall kernel module that filters network traffic based on user-defined rules. A listener script captures incoming connection data, which is then processed and displayed using a React + Leaflet web interface. The system employs marker clustering and geolocation APIs for efficient, intuitive visualization of global traffic patterns.
 
-4. **Check kernel logs for debugging information:**  
-    `sudo dmesg`
+---
 
- $\quad$ **Note:** To unload the firewall from the kernel module, run :  
-   $\quad$  `sudo rmmod firewall`
+## ⚙️ Getting Started
 
-### STEP 2 : Running the Listener Script
-1. **Compile the listener module :**
+GeoMap runs locally on a Linux machine. It was developed and tested on **Ubuntu 24.04.2** — using the same environment is recommended for best results.
 
-    `make listener`
+### 1️⃣ Load the Firewall Kernel Module
 
-2. **Run the executable:**
+1. **Compile the module**  
+   ```bash
+   make
+   ```
 
-    `./listener`
+2. **Insert it into the running kernel**  
+   ```bash
+   sudo insmod firewall.ko
+   ```
 
-**Note:** To stop the listener module, simply press `Ctrl + D` if the script is waiting for input, or use `Ctrl + C` to interrupt it immediately. If needed, you can also remove the `./listener` executable by running `rm ./listener` in your terminal. 
+3. **Verify the module is active**  
+   ```bash
+   lsmod | grep firewall
+   ```
 
-### STEP 3 : Running the Web Application 
+4. **View debug output (optional)**  
+   ```bash
+   sudo dmesg
+   ```
 
-1. **Navigate to the firewall project directory**:
-    
-    - First, go to the `firewall_app` directory where the web application is located:
+5. **To remove the module when finished**  
+   ```bash
+   sudo rmmod firewall
+   ```
 
-      `cd firewall`
+---
 
-2. **Install the necessary dependencies**:
-    - Ensure that you have **Node.js** installed. If you don't, you can download and install it from [Node.js Official Website](https://nodejs.org/).
-    - Once Node.js is installed, run the following command to install all required dependencies:
+### 2️⃣ Start the Listener Script
 
-      `npm install`
-    - if errors occur, see error list and fixes below
-3. **Creating your IPGeo API key**:
-    Head over to [IP Geolocation](https://ipgeolocation.io/) to create a free account. Once logged in, head over to dashboards to copy your api key into the program. 
-    
-    To add the api key, create a `.env` file in the same directory as the the `firewall_app`. Inside the file, write, `IPGEO_API_KEY="paste your key"` then save the file. 
+1. **Compile the listener**  
+   ```bash
+   make listener
+   ```
 
-4. **Start the web application**:
-    - After the installation completes, you can start the application by running:
-      `npm run dev`
+2. **Run the listener**  
+   ```bash
+   ./listener
+   ```
 
-5. **Access the web app**:
-    - Open your browser and go to `http://localhost:3000` to view and interact with the firewall application.
+   > Press `Ctrl + C` to stop it, or `Ctrl + D` if it's waiting for input.
 
-**NOTE:** If you encouter any issues when running, see list of potential issues you may try : 
-1. Error: Could not locate the bindings file. Remove and re-install the package json independicies
+---
 
-    `rm -rf node_modules package-lock.json`
-    
-    Run `npm install` again. 
+### 3️⃣ Launch the Web Application
 
+1. **Navigate to the frontend directory**  
+   ```bash
+   cd firewall
+   ```
 
-> Once the firewall is running, the listener script captures network data, which is processed and visualized on the GeoMap dashboard.
+2. **Install dependencies**  
+   ```bash
+   npm install
+   ```
 
-## Setting Up Docker for Testing Purposes
-There are two machines, a virtual machine and a docker container. The docker container will send IP packets to the VM via a simulated network. We will load a firewall into the VM's kernel that will filter out packets sent from the docker container. Data will then be collected from the kernel space and be sent off to the user space program for visualization. 
+3. **Set up your IP Geolocation API key**  
+   - Sign up at [ipgeolocation.io](https://ipgeolocation.io)
+   - Create a `.env` file in the `firewall` directory:
+     ```bash
+     IPGEO_API_KEY="your_api_key_here"
+     ```
 
-### Step 1 : Loading Firewall Script into Kernel (If not already)
-1. Compile it:
+4. **Run the development server**  
+   ```bash
+   npm run dev
+   ```
 
-    `make`
+5. **View the dashboard**  
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-2. Insert kernel module into the running kernel:
+---
 
-    `sudo insmod firewall.ko`
+### 🧰 Troubleshooting
 
-3. List the kernel module:
+**Binding Error Fix**  
+If you see an error like:  
+`Error: Could not locate the bindings file`
 
-    `lsmod | grep firewall`
+Try:
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
 
-4. Check kernel printout for evidence of firewall working and printing - useful for debugging:
+---
 
-    `sudo dmesg`
-5. Remove firewall module from kernel (ending firewall), this is cleaning it up when we're done running it
+## 🐳 Docker-Based Packet Testing Setup
 
-    `sudo rmmod firewall`
-### STEP 2 : Running the Listener Script
-1. **Compile the listener module :**
+Simulate traffic by sending spoofed packets from a Docker container to the VM where the firewall is loaded. Here's how to set up the test pipeline:
 
-    `make listener`
+---
 
-2. **Run the executable:**
+### 1️⃣ Load the Firewall on the VM (if not done already)
 
-    `./listener`
+```bash
+make
+sudo insmod firewall.ko
+lsmod | grep firewall
+sudo dmesg  # Optional debug logs
+```
 
-3. For testing purposes, we need to get the port number listener is listening on.
+To remove when done:
+```bash
+sudo rmmod firewall
+```
 
-    Run `ps aux | grep listener`. You should see something like this : 
+---
 
-    `username    313685  0.2  0.0   4756  1524 pts/0    S+   15:39   0:00 ./listener`
+### 2️⃣ Run the Listener
 
-    Make note of the `313695` port number (it is different each time)
+```bash
+make listener
+./listener
+```
 
-### Step 3:  Setup Docker Container 
-1. Start up Docker Container, this will search up the directory for a `.yml` file to run 
+To find the listener's PID:
+```bash
+ps aux | grep listener
+```
 
-    `sudo docker compose up -d`
+Example:
+```
+username 313685 0.2 0.0 4756 1524 pts/0 S+ 15:39 0:00 ./listener
+```
 
-2. Get the ID of the Container
+Note the PID (e.g., `313685`) for use in the spoofing script.
 
-    `sudo docker ps`
+---
 
-3. The packet spoofing python program exists in the vm so we need to copy it over to the container 
+### 3️⃣ Start Docker Test Environment
 
-    `sudo docker cp packet_spoofer.py <container id>:/tmp`
+1. **Start container**  
+   ```bash
+   sudo docker compose up -d
+   ```
 
-4. We need to run the python packet sending program from the container so we need to open up a shell in the container
+2. **Get container ID**  
+   ```bash
+   sudo docker ps
+   ```
 
-    `sudo docker exec -it <container id> /bin/bash`
+3. **Copy the spoofing script into the container**  
+   ```bash
+   sudo docker cp packet_spoofer.py <container_id>:/tmp
+   ```
 
-5. Execute the python packet sending program from the container terminal we just opened
+4. **Open a shell in the container**  
+   ```bash
+   sudo docker exec -it <container_id> /bin/bash
+   ```
 
-    `cd tmp`
+5. **Run the packet spoofing script**  
+   ```bash
+   cd /tmp
+   ```
 
-    Open up the `packet_spoofer.py` file and look for 
-    
-    `dst_addr = (133625, 0)  # Set to listener's PID here`
-    
-    Replace the first index of the tuple with the port number your got from step 2. 
-    
-    Save the file and run : 
+   Edit `packet_spoofer.py`:
+   ```python
+   dst_addr = (PID_HERE, 0)  # Replace with the PID from earlier
+   ```
 
-    `python3 packet_spoofer.py`
-    
+   Save the file and run:
+   ```bash
+   python3 packet_spoofer.py
+   ```
+
+---
+
+## ✅ Summary
+
+Once set up, GeoMap provides a real-time, interactive dashboard for monitoring and visualizing firewall events. It’s ideal for understanding network behavior, identifying potential intrusions, and gaining insight into traffic origins using IP geolocation.
+
+---
+
+## 📄 License & Contributions
+
+This project is open for further development and contributions. Reach out if you'd like to collaborate or expand the tool’s capabilities.
+
+## 🙋 About the Authors
+
+This is a personal exploration into operating system internals, network monitoring, and interactive data visualization. Built from scratch to understand Linux packet flow, IPC, and data pipelines from kernel to browser.
+
+Feel free to fork, collaborate, or reach out with feedback or feature ideas.
+
+## 📬 Contact
+
+Feel free to reach out with questions, feedback, or collaboration inquiries!
+
+📧 [andrewsushi.c8@gmail.com]  
+💼 [linkedin.com/in/andrew-chan8]
+
+---# network-geolocator
